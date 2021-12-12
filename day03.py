@@ -76,6 +76,3 @@ if __name__ == '__main__':
     report = get_input('day03.txt')
     print(compute_power_consumption(report))
     print(compute_life_support_rating(report))
-    
-    mode([1,1,1,0,0,0])
-    mode([0,0,0,1,1,1])
