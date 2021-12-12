@@ -1,16 +1,5 @@
 from pathlib import Path
-import sys
-
-example = """199
-200
-208
-210
-200
-207
-240
-269
-260
-263"""
+from utils import get_input
 
 def count_increases(depths):
 	depths = [int(d) for d in depths.splitlines()]
@@ -32,9 +21,18 @@ def count_increases_threes(depths):
 	return increases
 
 if __name__ == '__main__':
+	example = """199
+	200
+	208
+	210
+	200
+	207
+	240
+	269
+	260
+	263"""
 
-	handle = Path()/'input'/'day01-puzzle1.txt'
-	depths = handle.read_text()
+	depths = get_input('day01.txt')
 
 	assert count_increases(example) == 7, 'example failed'
 	print(f'depth increased {count_increases(depths)}')

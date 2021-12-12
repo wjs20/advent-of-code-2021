@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+from utils import get_input
 
 @dataclass
 class Submarine:
@@ -59,6 +60,5 @@ if __name__ == '__main__':
     assert calculate_final_position(submarine, example, adjust_func=adjust_position) == 150, 'adjust_position failed'
     assert calculate_final_position(submarine, example, adjust_func=adjust_position_aim) == 900, 'adjust_position_aim failed'
     
-    handle = Path()/'input'/'day02-puzzle1.txt'
-    commands = handle.read_text()
+    commands = get_input('day02.txt')
     print(calculate_final_position(submarine, commands, adjust_func=adjust_position_aim))
