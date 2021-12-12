@@ -12,9 +12,6 @@ example = """199
 260
 263"""
 
-handle = Path('input/day01-puzzle1.txt')
-depths = handle.read_text()
-
 def count_increases(depths):
 	depths = [int(d) for d in depths.splitlines()]
 	increases = 0
@@ -23,9 +20,6 @@ def count_increases(depths):
 			if depth > depths[i - 1]:
 				increases += 1
 	return increases
-
-assert count_increases(example) == 7, 'example failed'
-print(f'depth increased {count_increases(depths)}')
 
 def count_increases_threes(depths):
 	depths = [int(d) for d in depths.splitlines()]
@@ -37,5 +31,13 @@ def count_increases_threes(depths):
 				increases += 1
 	return increases
 
-assert count_increases_threes(example) == 5, 'example failed'
-print(f'depth increased {count_increases_threes(depths)}')
+if __name__ == '__main__':
+
+	handle = Path()/'input'/'day01-puzzle1.txt'
+	depths = handle.read_text()
+
+	assert count_increases(example) == 7, 'example failed'
+	print(f'depth increased {count_increases(depths)}')
+
+	assert count_increases_threes(example) == 5, 'example failed'
+	print(f'depth increased {count_increases_threes(depths)}')
