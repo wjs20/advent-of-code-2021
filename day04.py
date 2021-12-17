@@ -21,7 +21,18 @@ class Board:
     def reset(self):
         self.drawn == 0
 
-def play_bingo(nums, grids):
+def parse_input(input):
+    lines = [line.lstrip() for line in input.splitlines()]
+    nums = [int(o) for o in lines[0].split(',')]
+    boards = [
+        [
+            re.split('\D+', row) for row in lines[i:i+5]]
+            for i in range(2, len(lines), 6)
+        ]
+    boards = np.stack([np.array(board, dtype=np.uint8) for board in boards])
+    return nums, boards
+
+def win_bingo(nums, grids):
     boards = [Board(grid) for grid in grids]
     
     bingo = False
@@ -35,16 +46,21 @@ def play_bingo(nums, grids):
 
     return num * board.score()
 
-def parse_input(input):
-    lines = [line.lstrip() for line in input.splitlines()]
-    nums = [int(o) for o in lines[0].split(',')]
-    boards = [
-        [
-            re.split('\D+', row) for row in lines[i:i+5]]
-            for i in range(2, len(lines), 6)
-        ]
-    boards = np.stack([np.array(board, dtype=np.uint8) for board in boards])
-    return nums, boards
+def lose_bingo(nums, grids):
+    boards = [Board(grid) for grid in grids]
+    bingos = 0
+    game_over = False
+    for num in nums:
+        for board in boards:
+            if not board.bingo:
+                board.update(num)
+                if board.bingo:bingos += 1
+            if bingos == len(boards):
+                game_over = True
+                break
+        if game_over: break    
+    print(board.array, board.drawn, num)
+    return num * board.score()
 
 if __name__ == '__main__':
     example = """7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
@@ -68,7 +84,9 @@ if __name__ == '__main__':
     2  0 12  3  7"""
     
     nums, grids = parse_input(example)
-    print(play_bingo(nums, grids))
+    print(win_bingo(nums, grids))
+    print(lose_bingo(nums, grids))
     input = get_input('day04.txt')
     nums, grids = parse_input(input)
-    print(play_bingo(nums, grids))
+    print(win_bingo(nums, grids))
+    print(lose_bingo(nums, grids))
