@@ -18,24 +18,20 @@ class VentLine:
     def positions(self):
         
         if self.is_vertical():
+            x = self.x1
             if self.y2 > self.y1:
                 y = list(range(self.y1, self.y2 + 1))
-                x = self.x1
-                return x, y
             else:
                 y = list(range(self.y2, self.y1 + 1))
-                x = self.x1
-                return x, y
+            return x, y
         
         elif self.is_horizontal():
+            y = self.y1
             if self.x2 > self.x1:
                 x = list(range(self.x1, self.x2 + 1))
-                y = self.y1
-                return x, y
             else:
                 x = list(range(self.x2, self.x1 + 1))
-                y = self.y1
-                return x, y
+            return x, y
         
         else:
             raise ValueError('diagonal line')
