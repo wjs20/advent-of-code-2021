@@ -54,7 +54,7 @@ def lose_bingo(nums, grids):
         for board in boards:
             if not board.bingo:
                 board.update(num)
-                if board.bingo:bingos += 1
+                if board.bingo: bingos += 1
             if bingos == len(boards):
                 game_over = True
                 break
