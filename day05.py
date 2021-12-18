@@ -58,9 +58,6 @@ class SeaBed:
         row, col = ventline.positions()
         self.map[row, col] += 1
 
-    def count_overlaps(self):
-        return (self.map >= 2).sum()
-
     def map_seabed(self, ignore_diags = True):
 
         self.reset()
