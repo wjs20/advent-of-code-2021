@@ -24,7 +24,7 @@ class VentLine:
             row = list(range(row[0], row[1] + 1))
             return row, col
         
-        if self.is_horizontal():
+        elif self.is_horizontal():
             col = sorted([self.x1, self.x2])
             row = self.y1
             col = list(range(col[0], col[1] + 1))
