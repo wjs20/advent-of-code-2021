@@ -4,42 +4,29 @@
 # factory method
 
 class LanternFish:
-    
-    mature_lifespan = [6, 5, 4, 3, 2, 1, 0]
 
-    def __init__(self, timer):
-        self.timer = timer if timer else 8
-        self.is_mature = True if timer else False
+    def __init__(self, stage):
+        self.stage = stage
 
-    def increment_timer(self):
-        if not self.is_mature():
-            self.timer - 1
-            if self.timer == 0:
-                self.is_mature = True
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.stage > 0:
+            self.stage -= 1
         else:
-            pass
+            self.stage = 6
 
-    @classmethod
-    def from_mature(cls, timer):
-        pass
-
-def cycle(iterable):
-    # cycle('ABCD') --> A B C D A B C D A B C D ...
-    saved = []
-    for element in iterable:
-        yield element
-        if element <= 6:
-            saved.append(element)
-    while saved:
-        for element in saved:
-              yield element
-
-def test_cycle(start):
-    nums = list(range(start, -1, -1))
-    for i,num in enumerate(cycle(nums)):
-        print(num) 
-        if i > 10: 
-            break
+    def can_reproduce(self):
+        return True if self.stage == 0 else False
 
 if __name__ == '__main__':
-    test_cycle(8)
+
+    fish = [LanternFish(n) for n in [4,1,9]]
+
+    iterations = 10
+    for i in range(iterations):
+        
+        for f in fish:
+
+
